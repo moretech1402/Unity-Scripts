@@ -5,11 +5,18 @@ namespace Move
     [RequireComponent(typeof(Rigidbody2D))]
     public class CharacterMove : MonoBehaviour
     {
-        [SerializeField] float defaultSpeed = 5;
+        [SerializeField] float defaultSpeed = 5, defaultRunMult = 2;
+
+        protected bool isRunning;
 
         new Rigidbody2D rigidbody;
 
-        protected void Move(Vector2 movement) => rigidbody.velocity = movement * defaultSpeed;
+        protected void Move(Vector2 movement) {
+            var speed = defaultSpeed * (isRunning ? defaultRunMult : 1);
+            rigidbody.velocity = speed * movement;
+        }
+        
+        protected void Run(bool running) => isRunning = running;
 
         void InitRigidbody(){
             rigidbody = GetComponent<Rigidbody2D>();
