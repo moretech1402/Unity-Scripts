@@ -1,3 +1,4 @@
+using Core.Events;
 using UnityEngine;
 
 namespace Move
@@ -7,26 +8,43 @@ namespace Move
     {
         [SerializeField] float defaultSpeed = 5, defaultRunMult = 2;
 
+        float speed;
         protected bool isRunning;
 
         new Rigidbody2D rigidbody;
 
-        protected void Move(Vector2 movement) {
-            var speed = defaultSpeed * (isRunning ? defaultRunMult : 1);
-            rigidbody.velocity = speed * movement;
+        void MovementSpeedReceived(float movementSpeed)
+        {
+            speed = movementSpeed >= 0 ? movementSpeed : defaultSpeed;
+            StatEventManager.OnMovementSpeedReceived -= MovementSpeedReceived;
         }
-        
+
+        protected void Move(Vector2 movement)
+        {
+            StatEventManager.RequestMovementSpeed(gameObject.GetInstanceID());
+            StatEventManager.OnMovementSpeedReceived += MovementSpeedReceived;
+            var finalSpeed = speed * (isRunning ? defaultRunMult : 1);
+            rigidbody.velocity = finalSpeed * movement;
+        }
+
         protected void Run(bool running) => isRunning = running;
 
-        void InitRigidbody(){
+        void InitRigidbody()
+        {
             rigidbody = GetComponent<Rigidbody2D>();
             rigidbody.gravityScale = 0;
             rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
             rigidbody.interpolation = RigidbodyInterpolation2D.Interpolate;
         }
 
-        private void Awake() {
+        private void Awake()
+        {
             InitRigidbody();
+
+            /*
+            var stats = GetComponent<StatsHandlerGO>();
+            speed = stats != null ? stats.GetCurrent(StatKeys.MovementSpeed) : defaultSpeed;
+            */
         }
     }
 
