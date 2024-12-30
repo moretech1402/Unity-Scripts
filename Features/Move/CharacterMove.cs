@@ -21,10 +21,18 @@ namespace Move
 
         protected void Move(Vector2 movement)
         {
+            // Move
             StatEventManager.RequestMovementSpeed(gameObject.GetInstanceID());
             StatEventManager.OnMovementSpeedReceived += MovementSpeedReceived;
             var finalSpeed = speed * (isRunning ? defaultRunMult : 1);
             rigidbody.velocity = finalSpeed * movement;
+
+            // Notify
+            var id = gameObject.GetInstanceID();
+            if (movement.magnitude > 0)
+                EventManager.GOMoved(id, movement, finalSpeed);
+            else
+                EventManager.GOMoveStopped(id);
         }
 
         protected void Run(bool running) => isRunning = running;
@@ -40,11 +48,6 @@ namespace Move
         private void Awake()
         {
             InitRigidbody();
-
-            /*
-            var stats = GetComponent<StatsHandlerGO>();
-            speed = stats != null ? stats.GetCurrent(StatKeys.MovementSpeed) : defaultSpeed;
-            */
         }
     }
 

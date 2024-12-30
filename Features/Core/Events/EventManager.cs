@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Core;
 using UnityEngine;
 
 namespace Core.Events
@@ -23,6 +20,15 @@ namespace Core.Events
 
         internal static event Action OnInputEscape;
         internal static void InputEscape() => OnInputEscape?.Invoke();
+        #endregion
+
+        #region Movement
+        public static event Action<int, Vector2, float> OnGOMoved;
+        public static void GOMoved(int goID, Vector2 direction, float speed) => OnGOMoved?.Invoke(goID, direction, speed);
+
+        internal static event Action<int> OnGOMoveStopped;
+        internal static void GOMoveStopped(int goID) => OnGOMoveStopped?.Invoke(goID);
+
         #endregion
     }
 
