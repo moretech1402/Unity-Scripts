@@ -15,13 +15,15 @@ namespace Move
         [SerializeField] float defaultSpeed = 5, defaultRunMult = 2, defaultJumpForce = 5f, slideSpeed = 7, slideDownSpeed = 10;
         [SerializeField] GameObject statsProvider;
 
-        float speed, runMult = 1;
+        float speed;
+        bool isRunning, oldIsGrounded = true;
         Vector3 velocity, hitNormal;
 
         const float GRAVITY_VALUE = -9.81f;
 
         CharacterController controller;
 
+        bool IsGrounded => controller.isGrounded;
         int StatsID => statsProvider.GetInstanceID();
 
         float ValueOrDefault(float value, float defaultValue) => value >= 0 ? value : defaultValue;
@@ -62,7 +64,7 @@ namespace Move
                 RequestStatValue(MoveStatKeys.JumpForce, JumpForceReceived, defaultJumpForce);
         }
 
-        public void Run(bool running) => runMult = running ? defaultRunMult : 1;
+        public void Run(bool running) => isRunning = running;
 
         private void MovementSpeedReceived(float value)
         {
@@ -72,9 +74,11 @@ namespace Move
 
         public void Move(Vector3 movement)
         {
+            if(!IsGrounded) return;
             // Calculate Speed
             if (movement == Vector3.zero) speed = 0;
             else RequestStatValue(MoveStatKeys.MovementSpeed, MovementSpeedReceived, defaultSpeed);
+            var runMult = isRunning ? defaultRunMult : 1;
 
             // To Avoid speed increase when diagonal move
             var normalizedMovement = Vector3.ClampMagnitude(movement, 1);
@@ -84,22 +88,34 @@ namespace Move
 
             var finalMove = speed * runMult * normalizedMovement;
             velocity = new(finalMove.x, velocity.y, finalMove.z);
+
+            if (finalMove.magnitude <= 0) EventManager.StopGO(gameObject.GetInstanceID());
+            else EventManager.Move(gameObject.GetInstanceID(), isRunning);
         }
 
         private void HandleGravity()
         {
+            print($"{IsGrounded} {oldIsGrounded}");
             var yAceleration = GRAVITY_VALUE * Time.deltaTime;
             velocity.y += yAceleration;
+            
+            if (IsGrounded && velocity.y < 0) velocity.y = -1;
 
-            if (controller.isGrounded && velocity.y < 0) velocity.y = -1 * Mathf.Epsilon;
+            if (oldIsGrounded != IsGrounded)
+            {
+                oldIsGrounded = IsGrounded;
+                EventManager.IsGrounded(gameObject.GetInstanceID(), IsGrounded);
+            }
         }
 
-        void SlopeDown(){
+        void SlopeDown()
+        {
             var isOnSlope = Vector3.Angle(Vector3.up, hitNormal) >= controller.slopeLimit;
-            if(isOnSlope){
+            if (isOnSlope)
+            {
                 float AddSlideSpeed(float current, float axis) => current + (1f - hitNormal.y) * axis * slideSpeed;
                 velocity = new(AddSlideSpeed(velocity.x, hitNormal.x), velocity.y -= slideDownSpeed, AddSlideSpeed(velocity.z, hitNormal.z));
-            } 
+            }
         }
 
         #region Life Cycle

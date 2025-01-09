@@ -1,28 +1,53 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using Core;
 using Core.Events;
 using UnityEngine;
 
 namespace Animation
 {
-    [RequireComponent(typeof(Animator))]
-    public class PartAnimator3D : MonoBehaviour
+    public class PartAnimator3D : PartAnimator
     {
-        Animator animator;
-        void Animate(Vector2 vector)
+        int speedHash, isRunningHash, isGroundedHash;
+
+        void AnimateMove(int goID, bool isRunning)
         {
-            animator.SetFloat("Speed", vector.magnitude);
+            if (goID == gameObject.GetInstanceID())
+            {
+                animator.SetFloat(speedHash, 1);
+                animator.SetBool(isRunningHash, isRunning);
+            }
+        }
+
+        void AnimateStop(int goID)
+        {
+            if (goID == gameObject.GetInstanceID())
+                animator.SetFloat(speedHash, 0);
+        }
+
+        private void IsGrounded(int goID, bool isGrounded)
+        {
+            if(goID == gameObject.GetInstanceID())
+                animator.SetBool(isGroundedHash, isGrounded);
         }
 
         private void Start()
         {
-            animator = GetComponent<Animator>();
-            EventManager.OnInputMove += Animate;
+            InitializeAnimator();
+
+            speedHash = AnimatorManager.GetHash(AnimatorParameters3D.Speed);
+            isRunningHash = AnimatorManager.GetHash(AnimatorParameters3D.IsRunning);
+            isGroundedHash = AnimatorManager.GetHash(AnimatorParameters3D.IsGrounded);
+
+            EventManager.OnMove += AnimateMove;
+            EventManager.OnStopGO += AnimateStop;
+            EventManager.OnIsGrounded += IsGrounded;
         }
 
         private void OnDestroy()
         {
-            EventManager.OnInputMove -= Animate;
+            EventManager.OnMove -= AnimateMove;
+            EventManager.OnStopGO -= AnimateStop;
+            EventManager.OnIsGrounded -= IsGrounded;
         }
     }
 

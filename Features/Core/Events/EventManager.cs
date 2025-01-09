@@ -6,29 +6,39 @@ namespace Core.Events
     public static class EventManager
     {
         #region Input
-        internal static event Action<Vector2> OnInputMove;
-        internal static void InputMove(Vector2 move) => OnInputMove?.Invoke(move);
 
-        internal static event Action<bool> OnInputRun;
-        internal static void InputRun(bool running) => OnInputRun?.Invoke(running);
+        public static event Action<Vector2> OnInputMove;
+        public static void InputMove(Vector2 move) => OnInputMove?.Invoke(move);
 
-        internal static event Action OnInputAction;
-        internal static void InputAction() => OnInputAction?.Invoke();
+        public static event Action<Vector2> OnInputMouse;
+        public static void InputMouse(Vector2 move) => OnInputMouse?.Invoke(move);
 
-        internal static event Action OnInputMenu;
-        internal static void InputMenu() => OnInputMenu?.Invoke();
+        public static event Action OnInputAction;
+        public static void InputAction() => OnInputAction();
 
-        internal static event Action OnInputEscape;
-        internal static void InputEscape() => OnInputEscape?.Invoke();
+        public static event Action<bool> OnInputRun = delegate { };
+        public static void InputRun(bool run) => OnInputRun?.Invoke(run);
+
+        public static event Action OnInputJump = delegate { };
+        public static void InputJump() => OnInputJump();
+
+        public static event Action OnInputMenu;
+        public static void InputMenu() => OnInputMenu();
+
+        public static event Action OnInputEscape = delegate { };
+        public static void InputEscape() => OnInputEscape();
+
         #endregion
 
-        #region Movement
-        public static event Action<int, Vector2, float> OnGOMoved;
-        public static void GOMoved(int goID, Vector2 direction, float speed) => OnGOMoved?.Invoke(goID, direction, speed);
+        #region Move
+        public static event Action<int, bool> OnMove;
+        public static void Move(int goID, bool running) => OnMove?.Invoke(goID, running);
 
-        internal static event Action<int> OnGOMoveStopped;
-        internal static void GOMoveStopped(int goID) => OnGOMoveStopped?.Invoke(goID);
+        public static event Action<int> OnStopGO;
+        public static void StopGO(int goID) => OnStopGO?.Invoke(goID);
 
+        public static event Action<int, bool> OnIsGrounded;
+        public static void IsGrounded(int goID, bool isGrounded) => OnIsGrounded?.Invoke(goID, isGrounded);
         #endregion
     }
 

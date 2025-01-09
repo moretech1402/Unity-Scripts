@@ -1,34 +1,19 @@
-using System.Collections;
 using System.Collections.Generic;
-using Core;
 using UnityEngine;
+using Core;
+using System;
 
-namespace Animations
+namespace Animation
 {
-    public enum AnimatorParameters
+    public abstract class AnimatorManager : Singleton<AnimatorManager>
     {
-        DirectionX, DirectionY, Speed
-    }
+        protected Dictionary<Enum, string> dict;
 
-    public class AnimatorManager : Singleton<AnimatorManager>
-    {
+        public static int GetHash(Enum parameter) => Animator.StringToHash(Instance.dict[parameter]);
 
-        [Header("Parameters")]
-        [SerializeField] string directionX = "DirectionX";
-        [SerializeField] string directionY = "DirectionY";
-        [SerializeField] string speed = "Speed";
+        protected abstract void InitializeParameters();
 
-        Dictionary<AnimatorParameters, string> dict;
-
-        public static int GetHash(AnimatorParameters parameter) => Animator.StringToHash(Instance.dict[parameter]);
-
-        private void OnEnable()
-        {
-            dict = new Dictionary<AnimatorParameters, string>(){
-            { AnimatorParameters.DirectionX, directionX }, { AnimatorParameters.DirectionY, directionY },
-            { AnimatorParameters.Speed, speed }
-        };
-        }
+        private void OnEnable() => InitializeParameters();
     }
 
 }
