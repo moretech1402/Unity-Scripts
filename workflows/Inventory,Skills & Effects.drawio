@@ -1,9 +1,12 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0" version="26.0.4">
   <diagram name="Página-1" id="zJ56cZsjlUKfXEC5Kj2j">
-    <mxGraphModel dx="2037" dy="2236" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2864" dy="2236" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="yd0dgCso6gJ8eS-wFUj3-38" value="" style="whiteSpace=wrap;html=1;fillColor=none;horizontal=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="322.5" y="200" width="227.5" height="300" as="geometry" />
+        </mxCell>
         <mxCell id="yd0dgCso6gJ8eS-wFUj3-20" value="&lt;b&gt;AILMENTS&lt;/b&gt;" style="whiteSpace=wrap;html=1;fillColor=none;horizontal=1;verticalAlign=top;" vertex="1" parent="1">
           <mxGeometry x="120" y="-180" width="610" height="490" as="geometry" />
         </mxCell>
@@ -13,14 +16,14 @@
         <mxCell id="B-cx07S0kDvq5DFkw6KN-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="B-cx07S0kDvq5DFkw6KN-3" target="B-cx07S0kDvq5DFkw6KN-7" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="B-cx07S0kDvq5DFkw6KN-3" value="Effect&lt;div&gt;--------------------&lt;/div&gt;&lt;div&gt;string damageFormula&lt;/div&gt;&lt;div&gt;AilmentEffect[] ailments&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
-          <mxGeometry x="340" y="370" width="170" height="100" as="geometry" />
+        <mxCell id="B-cx07S0kDvq5DFkw6KN-3" value="Effect&lt;div&gt;--------------------&lt;/div&gt;&lt;div&gt;DamageComposition[] damages&lt;/div&gt;&lt;div&gt;AilmentEffect[] ailments&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="340" y="370" width="190" height="100" as="geometry" />
         </mxCell>
         <mxCell id="B-cx07S0kDvq5DFkw6KN-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="B-cx07S0kDvq5DFkw6KN-4" target="B-cx07S0kDvq5DFkw6KN-3" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="B-cx07S0kDvq5DFkw6KN-4" value="AilmentEffect&lt;div&gt;------------------------&lt;/div&gt;&lt;div&gt;Ailment ailment&lt;/div&gt;&lt;div&gt;Target target&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
-          <mxGeometry x="365" y="220" width="120" height="80" as="geometry" />
+          <mxGeometry x="376.25" y="230" width="120" height="80" as="geometry" />
         </mxCell>
         <mxCell id="B-cx07S0kDvq5DFkw6KN-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="B-cx07S0kDvq5DFkw6KN-7" target="B-cx07S0kDvq5DFkw6KN-1" edge="1">
           <mxGeometry relative="1" as="geometry" />
@@ -34,11 +37,11 @@
         <mxCell id="B-cx07S0kDvq5DFkw6KN-8" value="ResourceCost&lt;div&gt;-----------------------&lt;/div&gt;&lt;div&gt;Resource resource&lt;/div&gt;&lt;div&gt;float cost&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
           <mxGeometry x="130" y="430" width="150" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="B-cx07S0kDvq5DFkw6KN-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="B-cx07S0kDvq5DFkw6KN-9" target="B-cx07S0kDvq5DFkw6KN-8" edge="1">
+        <mxCell id="yd0dgCso6gJ8eS-wFUj3-47" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="B-cx07S0kDvq5DFkw6KN-9" target="B-cx07S0kDvq5DFkw6KN-8">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="B-cx07S0kDvq5DFkw6KN-9" value="(enum) Resource&lt;div&gt;------------------------&lt;/div&gt;&lt;div&gt;HP, MP, STA, Moral, ...&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
-          <mxGeometry x="145" y="330" width="120" height="60" as="geometry" />
+          <mxGeometry x="-40" y="445" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="yd0dgCso6gJ8eS-wFUj3-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="yd0dgCso6gJ8eS-wFUj3-1" target="B-cx07S0kDvq5DFkw6KN-7">
           <mxGeometry relative="1" as="geometry" />
@@ -47,7 +50,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="yd0dgCso6gJ8eS-wFUj3-1" value="(enum) Target&lt;div&gt;-----------------------&lt;/div&gt;&lt;div&gt;User, Ally, Enemy, Allies, Enemies&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
-          <mxGeometry x="590" y="440" width="125" height="70" as="geometry" />
+          <mxGeometry x="650" y="445" width="125" height="70" as="geometry" />
         </mxCell>
         <mxCell id="yd0dgCso6gJ8eS-wFUj3-21" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="yd0dgCso6gJ8eS-wFUj3-2" target="B-cx07S0kDvq5DFkw6KN-4">
           <mxGeometry relative="1" as="geometry" />
@@ -59,21 +62,21 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="yd0dgCso6gJ8eS-wFUj3-2" value="Ailment&lt;div&gt;------------------&lt;/div&gt;&lt;div&gt;Interval duration&lt;/div&gt;&lt;div&gt;Interval applyInterval&lt;/div&gt;&lt;div&gt;Ailment[] secondaryAilments&lt;/div&gt;&lt;div&gt;Apply()&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry x="347.5" y="70" width="157.5" height="120" as="geometry" />
+          <mxGeometry x="357.5" y="70" width="157.5" height="120" as="geometry" />
         </mxCell>
         <mxCell id="yd0dgCso6gJ8eS-wFUj3-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="yd0dgCso6gJ8eS-wFUj3-9" target="yd0dgCso6gJ8eS-wFUj3-10">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="yd0dgCso6gJ8eS-wFUj3-9" value="(enum) IntervalType&lt;div&gt;---------------------------&lt;/div&gt;&lt;div&gt;OnAdded, OnTick, OnHit, OnBeHitted, ...&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
-          <mxGeometry x="342.5" y="-140" width="160" height="110" as="geometry" />
+          <mxGeometry x="355" y="-150" width="160" height="110" as="geometry" />
         </mxCell>
         <mxCell id="yd0dgCso6gJ8eS-wFUj3-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="yd0dgCso6gJ8eS-wFUj3-10" target="yd0dgCso6gJ8eS-wFUj3-2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="yd0dgCso6gJ8eS-wFUj3-10" value="Interval&lt;div&gt;------------------------&lt;/div&gt;&lt;div&gt;IntervalType type&lt;/div&gt;&lt;div&gt;int stackNumber&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="362.5" y="-10" width="120" height="70" as="geometry" />
+          <mxGeometry x="376.25" y="-10" width="120" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="yd0dgCso6gJ8eS-wFUj3-3" value="AilmentDamagePerStack : Ailment&lt;div&gt;---------------------------------&lt;/div&gt;&lt;div&gt;string damageFormula&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+        <mxCell id="yd0dgCso6gJ8eS-wFUj3-3" value="AilmentDamagePerStack : Ailment&lt;div&gt;---------------------------------&lt;/div&gt;&lt;div&gt;DamageComposition[] damage&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
           <mxGeometry x="130" y="60" width="180" height="140" as="geometry" />
         </mxCell>
         <mxCell id="yd0dgCso6gJ8eS-wFUj3-6" value="AilmentMod : Ailment&lt;div&gt;----------------------------&lt;/div&gt;&lt;div&gt;StatKey stat&lt;/div&gt;&lt;div&gt;int fixedMod&lt;/div&gt;&lt;div&gt;float percentMod&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
@@ -81,6 +84,30 @@
         </mxCell>
         <mxCell id="yd0dgCso6gJ8eS-wFUj3-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="B-cx07S0kDvq5DFkw6KN-1" target="B-cx07S0kDvq5DFkw6KN-1">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yd0dgCso6gJ8eS-wFUj3-39" value="&lt;b&gt;EFFECTS&lt;/b&gt;" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;rotation=0;direction=east;flipV=1;flipH=1;" vertex="1" parent="1">
+          <mxGeometry x="347.5" y="320" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yd0dgCso6gJ8eS-wFUj3-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="yd0dgCso6gJ8eS-wFUj3-40" target="yd0dgCso6gJ8eS-wFUj3-41">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yd0dgCso6gJ8eS-wFUj3-40" value="(enum) Afinity&lt;div&gt;----------------------&lt;/div&gt;&lt;div&gt;Slash, Piercing, Fire, Ice, ..&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="-220" y="210" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="yd0dgCso6gJ8eS-wFUj3-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="yd0dgCso6gJ8eS-wFUj3-41" target="yd0dgCso6gJ8eS-wFUj3-42">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yd0dgCso6gJ8eS-wFUj3-41" value="Damage&lt;div&gt;-------------&lt;/div&gt;&lt;div&gt;string formula&lt;/div&gt;&lt;div&gt;Afinity afinity&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-200" y="330" width="130" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="yd0dgCso6gJ8eS-wFUj3-45" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="yd0dgCso6gJ8eS-wFUj3-42" target="yd0dgCso6gJ8eS-wFUj3-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yd0dgCso6gJ8eS-wFUj3-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="yd0dgCso6gJ8eS-wFUj3-42" target="B-cx07S0kDvq5DFkw6KN-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yd0dgCso6gJ8eS-wFUj3-42" value="DamageComposition&lt;div&gt;-----------------------------&lt;/div&gt;&lt;div&gt;Damage[] damages&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry y="320" width="170" height="90" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
