@@ -1,0 +1,43 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0" version="26.0.4">
+  <diagram name="Página-1" id="zJ56cZsjlUKfXEC5Kj2j">
+    <mxGraphModel dx="1426" dy="747" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="B-cx07S0kDvq5DFkw6KN-1" value="ItemData&lt;div&gt;------------------------&lt;/div&gt;&lt;div&gt;ActiveSkill effect&lt;/div&gt;&lt;div&gt;...&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="310" y="480" width="190" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="B-cx07S0kDvq5DFkw6KN-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="B-cx07S0kDvq5DFkw6KN-3" target="B-cx07S0kDvq5DFkw6KN-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="B-cx07S0kDvq5DFkw6KN-3" value="Effect&lt;div&gt;--------------------&lt;/div&gt;&lt;div&gt;string damageFormula&lt;/div&gt;&lt;div&gt;AilmentEffect[] ailments&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="160" width="170" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="B-cx07S0kDvq5DFkw6KN-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="B-cx07S0kDvq5DFkw6KN-4" target="B-cx07S0kDvq5DFkw6KN-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="B-cx07S0kDvq5DFkw6KN-4" value="AilmentEffect&lt;div&gt;------------------------&lt;/div&gt;&lt;div&gt;Ailment ailment&lt;/div&gt;&lt;div&gt;Target target&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="345" y="10" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="B-cx07S0kDvq5DFkw6KN-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="B-cx07S0kDvq5DFkw6KN-7" target="B-cx07S0kDvq5DFkw6KN-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="B-cx07S0kDvq5DFkw6KN-7" value="ActiveSkill&lt;div&gt;-----------------------&lt;/div&gt;&lt;div&gt;...&lt;/div&gt;&lt;div&gt;ResourceCost[] cost&lt;/div&gt;&lt;div&gt;Effect effect&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="327.5" y="330" width="155" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="B-cx07S0kDvq5DFkw6KN-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="B-cx07S0kDvq5DFkw6KN-8" target="B-cx07S0kDvq5DFkw6KN-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="B-cx07S0kDvq5DFkw6KN-8" value="ResourceCost&lt;div&gt;-----------------------&lt;/div&gt;&lt;div&gt;Resource resource&lt;/div&gt;&lt;div&gt;float cost&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="110" y="220" width="150" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="B-cx07S0kDvq5DFkw6KN-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="B-cx07S0kDvq5DFkw6KN-9" target="B-cx07S0kDvq5DFkw6KN-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="B-cx07S0kDvq5DFkw6KN-9" value="(enum) Resource&lt;div&gt;------------------------&lt;/div&gt;&lt;div&gt;HP, MP, STA, Moral, ...&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="125" y="70" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
