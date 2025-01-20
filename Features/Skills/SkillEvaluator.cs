@@ -7,34 +7,36 @@ using UnityEngine;
 
 public class SkillEvaluator : Core.Singleton<SkillEvaluator>
 {
-    [SerializeField] ActiveSkill skill;
-    [SerializeField] StatsHandlerGO userStats, targetStats;
-
     [Header("Prefix")]
     [SerializeField] string user = "a"; [SerializeField] string target = "b",
     separator = "_";
 
     Dictionary<StatKeys, string> parameterDefs = new();
 
-    Dictionary<string, float> GetParametersWithPrefix(string prefix, StatsHandlerGO stats)
+    public static string User => Instance.user;
+    public static string Target => Instance.target;
+    public static string Separator => Instance.separator;
+    public static Dictionary<StatKeys, string> ParameterDefs => Instance.parameterDefs;
+
+    static Dictionary<string, float> GetParametersWithPrefix(string prefix, StatsHandlerBase stats)
     {
         Dictionary<string, float> parameters = new();
-        foreach (var param in parameterDefs)
-            parameters.Add($"{prefix}{separator}{param.Value}", stats.GetCurrent(param.Key));
+        foreach (var param in ParameterDefs)
+            parameters.Add($"{prefix}{Separator}{param.Value}", stats.GetCurrent(param.Key));
         return parameters;
     }
 
-    Dictionary<string, float> GetParameters(StatsHandlerGO userStats, StatsHandlerGO targetStats)
+    static Dictionary<string, float> GetParameters(StatsHandlerBase userStats, StatsHandlerBase targetStats)
     {
         Dictionary<string, float> parameters = new();
 
-        parameters.AddRange(GetParametersWithPrefix(user, userStats));
-        parameters.AddRange(GetParametersWithPrefix(target, targetStats));
+        parameters.AddRange(GetParametersWithPrefix(User, userStats));
+        parameters.AddRange(GetParametersWithPrefix(Target, targetStats));
 
         return parameters;
     }
 
-    float Evaluate(string formula, StatsHandlerGO user, StatsHandlerGO target)
+    public static float Evaluate(string formula, StatsHandlerBase user, StatsHandlerBase target)
     {
         Dictionary<string, float> parameters = GetParameters(user, target);
         return FormulaEvaluator.Evaluate(formula, parameters);
@@ -48,16 +50,5 @@ public class SkillEvaluator : Core.Singleton<SkillEvaluator>
             parameterDefs.Add(statParam.Key, statParam.Value.Shortening);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Initialize();
-        print(Evaluate(skill.Damage[0].Formula, userStats, targetStats));
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    void Start() => Initialize();
 }

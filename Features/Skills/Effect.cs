@@ -1,5 +1,7 @@
 using System;
+using Ailments;
 using Damages;
+using Skills.AilmentEffects;
 using UnityEngine;
 
 namespace Skills.Effects
@@ -11,5 +13,11 @@ namespace Skills.Effects
         [SerializeField] AilmentEffectComposition ailments;
 
         public Damage[] Damage => damage.Composition;
+    }
+
+    [Serializable]
+    public struct OnIntervalEffect{
+        [SerializeField] Effect effect;
+        [SerializeField] Interval interval;
     }
 }
