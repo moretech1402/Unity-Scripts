@@ -6,16 +6,25 @@ using UnityEngine;
 public class Flower : MonoBehaviour
 {
     #region Variables
+
+    [Header("Colors")]
     [Tooltip("The color when flower is full of nectar")]
-    [SerializeField] Color fullNectarColor = new(1f, 0f, .3f);
+    [SerializeField] Color fullNectarColor = new(1, 0, .3f);
 
     [Tooltip("The color when flower is empty of nectar")]
     [SerializeField] Color emptyNectarColor = new(.5f, 0f, 1f);
 
+    [Header("Colliders")]
+    [Tooltip("The solid collider representing petals")]
+    [SerializeField] Collider petalsCollider;
+
+    [Tooltip("The trigger collider representing nectar")]
+    [SerializeField] Collider nectarCollider;
+
+
     float nectarAmount;
 
-    Collider nectarCollider;
-    Collider petalsCollider;
+
     Material petalsMaterial;
 
     #endregion
@@ -29,10 +38,7 @@ public class Flower : MonoBehaviour
     public bool HasNectar => nectarAmount > 0f;
 
 
-    /// <summary>The trigger collider representing nectar</summary>
     public Collider NectarCollider => nectarCollider;
-
-    /// <summary>The solid collider representing petals</summary>
     public Collider PetalsCollider => petalsCollider;
 
     /// <summary>The flower petals material</summary>
@@ -87,6 +93,12 @@ public class Flower : MonoBehaviour
         nectarAmount = 1f;
 
         UpdateFlowerState();
+    }
+
+    private void Awake() {
+        // Get material
+        var meshRenderer = GetComponent<MeshRenderer>();
+        petalsMaterial = meshRenderer.material;
     }
 
     #endregion
