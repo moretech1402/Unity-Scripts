@@ -49,6 +49,21 @@ public class Flower : MonoBehaviour
 
     #region Functions
 
+    void ActiveColliders(bool active = true){
+        petalsCollider.gameObject.SetActive(active);
+        nectarCollider.gameObject.SetActive(active);
+    }
+
+    void UpdatePetalsColor(){
+        Color color = HasNectar ? fullNectarColor : emptyNectarColor;
+        petalsMaterial.SetColor("_BaseColor", color);
+    }
+
+    void UpdateFlowerState(){
+        ActiveColliders(HasNectar);
+        UpdatePetalsColor();
+    }
+
     /// <summary>
     /// Attempts to remove nectar from the flower
     /// </summary>
@@ -61,15 +76,17 @@ public class Flower : MonoBehaviour
         // Subtract nectar
         nectarAmount -= nectarTaken;
 
-        if(!HasNectar){
-            // Disable colliders
-            petalsCollider.gameObject.SetActive(false);
-            nectarCollider.gameObject.SetActive(false);
+        UpdateFlowerState();
 
-            // Change petals color to indicates that not nectar remaining
-            petalsMaterial.color = emptyNectarColor;
-        }
-        return 0;
+        return nectarTaken;
+    }
+
+    /// <summary>Resets the flower</summary>
+    public void ResetFlower(){
+        // Refill the nectar
+        nectarAmount = 1f;
+
+        UpdateFlowerState();
     }
 
     #endregion
