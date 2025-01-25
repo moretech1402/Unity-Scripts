@@ -8,11 +8,45 @@ public class FlowerArea : MonoBehaviour
     public const float AreaDiameter = 20f;
 
     // The list of all flower plants in this area (flower plants have multiple flowers)
-    List<GameObject> flowerPlants;
+    List<GameObject> flowerPlants = new();
 
     // A lookup Dictionary for looking up a flower from a nectar collider
-    Dictionary<Collider, Flower> nectarFlowerDictionary;
+    Dictionary<Collider, Flower> nectarFlowerDictionary = new();
 
-    // The list of all flowers in the flower area
-    public List<Flower> Flowers {get; private set;}
+    /// <summary>The list of all flowers in the flower area</summary>
+    public List<Flower> Flowers {get; private set;} = new();
+
+    /// <summary>Reset the flowers and flower plants</summary>
+    void ResetFlowers(){
+        // Roatate each flower around the y axis and subtly around x and z
+        foreach(var flowerPlant in flowerPlants){
+            var xRotation = Random.Range(-5f, 5f);
+            var yRotation = Random.Range(-180f, 180f);
+            var zRotation = Random.Range(-5f, 5f);
+
+            flowerPlant.transform.localRotation = Quaternion.Euler(xRotation, yRotation, zRotation);
+        }
+
+        // Reset each flower
+        foreach(var flower in Flowers){
+            flower.ResetFlower();
+        }
+    }
+
+    /// <summary>
+    /// Gets the <see cref="Flower"/> that a nectar collider belongs to
+    /// </summary>
+    /// <param name="collider">The nectar collider</param>
+    /// <returns>The matching flower</returns>
+    public Flower GetFlowerFromNectar(Collider collider){
+        return nectarFlowerDictionary[collider];
+    }
+
+    public Flower[] FindChildFlowers(){
+        return new Flower[0];
+    }
+
+    private void Start() {
+        FindChildFlowers();
+    }
 }
