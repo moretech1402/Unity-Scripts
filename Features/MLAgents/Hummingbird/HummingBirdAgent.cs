@@ -46,10 +46,10 @@ public class HummingBirdAgent : Agent
     Flower nearestFlower;
 
     /// <summary>Allows for smoother pitch changes</summary>
-    float smootherPitchChange;
+    float smoothPitchChange;
 
     /// <summary>Allows for smoother yaw changes</summary>
-    float smootherYawChange;
+    float smoothYawChange;
 
     /// <summary>Maximum angle that the bird can pitch up or down</summary>
     const float MAX_PITCH_ANGLE = 80;
@@ -252,7 +252,37 @@ public class HummingBirdAgent : Agent
     /// </param>
     public override void OnActionReceived(ActionBuffers actions)
     {
-        throw new NotImplementedException();
+        // Don't take actions if frozen
+        if(frozen) return;
+
+        var continuousActions = actions.ContinuousActions;
+        // Calculate movement vector
+        Vector3 move = new(continuousActions[0], continuousActions[1], continuousActions[2]);
+
+        // Add force in the direction of the move vector
+        rigidbody.AddForce(move * moveForce);
+
+        // Get the current rotation
+        var currentRotation = transform.rotation.eulerAngles;
+
+        // Calculate pitch and yaw rotation
+        var pitchChange = continuousActions[3];
+        var yawChange = continuousActions[4];
+
+        // Calculate smooth rotation changes
+        smoothPitchChange = Mathf.MoveTowards(smoothPitchChange, pitchChange, 2f * Time.fixedDeltaTime);
+        smoothYawChange = Mathf.MoveTowards(smoothYawChange, yawChange, 2f * Time.fixedDeltaTime);
+
+        // Calculate new pitch and yaw based on new smoothed values
+        // Clamp pitch to avoid flipping upside down
+        float pitch = currentRotation.x + smoothPitchChange * Time.fixedDeltaTime * pitchSpeed;
+        if(pitch > 180f) pitch -= 360f;
+        pitch = Mathf.Clamp(pitch, -MAX_PITCH_ANGLE, MAX_PITCH_ANGLE);
+
+        float yaw = currentRotation.y + smoothYawChange * Time.fixedDeltaTime * yawSpeed;
+
+        // Apply the new rotation
+        transform.rotation = Quaternion.Euler(pitch, yaw, 0f);
     }
 
     #endregion
