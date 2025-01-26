@@ -179,6 +179,17 @@ public class HummingBirdAgent : Agent
         transform.SetPositionAndRotation(potentialPosition, potentialRotation);
     }
 
+    /// <summary>
+    /// Active or deactive moving and actions of the agent
+    /// </summary>
+    /// <param name="freeze">Whether agent active or deactive</param>
+    public void FreezeAgent(bool freeze){
+        Debug.Assert(trainingMode == false, "Freeze/Unfreeze not supported in training");
+        frozen = freeze;
+        if(freeze) rigidbody.Sleep();
+        else rigidbody.WakeUp();
+    }
+
     #endregion
 
     #region Functions/Flower
