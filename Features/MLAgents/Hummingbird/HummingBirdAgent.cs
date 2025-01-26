@@ -1,5 +1,8 @@
+using System;
 using Unity.MLAgents;
+using Unity.MLAgents.Actuators;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 /// <summary>Humming Bird Machine Learning Agent</summary>
 public class HummingBirdAgent : Agent
@@ -235,6 +238,21 @@ public class HummingBirdAgent : Agent
 
         // Recalculate the nearest flowers now that the agent has moved
         UpdateNearestFlower();
+    }
+
+    /// <summary>
+    /// Called when an action is received from either the player input or the neural network
+    /// </summary>
+    /// <param name="actions">
+    ///     actions.ContinuousActions[0]: move vector x (-1: left, +1: right)
+    ///     actions.ContinuousActions[1]: move vector y (-1: down, +1: up)
+    ///     actions.ContinuousActions[2]: move vector z (-1: backward, +1: forward)
+    ///     actions.ContinuousActions[3]: pitch angle (-1: pitch down, +1: pitch up)
+    ///     actions.ContinuousActions[4]: yaw angle (-1: turn left, +1: turn right)
+    /// </param>
+    public override void OnActionReceived(ActionBuffers actions)
+    {
+        throw new NotImplementedException();
     }
 
     #endregion
