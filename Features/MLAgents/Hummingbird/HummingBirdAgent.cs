@@ -328,7 +328,36 @@ public class HummingBirdAgent : Agent
     /// <param name="actionsOut">An output action buffer</param>
     public override void Heuristic(in ActionBuffers actionsOut)
     {
-        throw new NotImplementedException();
+        // Create placeholders for all movement/turning
+        Vector3 forward = Vector3.zero, left = Vector3.zero, up = Vector3.zero;
+        float pitch, yaw;
+
+        // Convert keyboard inputs in movement and turning.
+        // All values should be beetween -1 and +1
+
+        static float GetDirectionMult(KeyCode positive, KeyCode negative){
+            if(Input.GetKey(positive)) return 1;
+            else if(Input.GetKey(negative)) return -1;
+            return 0;
+        }
+
+        forward = transform.forward * GetDirectionMult(KeyCode.W, KeyCode.S);
+        left = transform.right * GetDirectionMult(KeyCode.D, KeyCode.A);
+        up = transform.up * GetDirectionMult(KeyCode.E, KeyCode.C);
+
+        pitch = 1 * GetDirectionMult(KeyCode.UpArrow, KeyCode.DownArrow);
+        yaw = 1 * GetDirectionMult(KeyCode.RightArrow, KeyCode.LeftArrow);
+
+        // Combine the movement vectors and normalize
+        Vector3 combined = (forward + left + up).normalized;
+
+        // Add the movement, pitch and yaw values to actionsOut
+        var continuousActionsOut = actionsOut.ContinuousActions;
+        continuousActionsOut[0] = combined.x;
+        continuousActionsOut[1] = combined.y;
+        continuousActionsOut[2] = combined.z;
+        continuousActionsOut[3] = pitch;
+        continuousActionsOut[4] = yaw;
     }
 
     #endregion
