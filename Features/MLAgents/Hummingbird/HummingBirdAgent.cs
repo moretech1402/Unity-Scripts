@@ -64,6 +64,8 @@ public class HummingBirdAgent : Agent
 
     #region Functions
 
+    #region Functions/Move
+
     /// <summary>
     /// Generates a random position within the flower area.
     /// </summary>
@@ -173,10 +175,29 @@ public class HummingBirdAgent : Agent
         transform.SetPositionAndRotation(potentialPosition, potentialRotation);
     }
 
+    #endregion
+
+    #region Functions/Flower
+
+    /// <summary>Update the nearest flower to the agent</summary>
     public void UpdateNearestFlower()
     {
-        // ...
+        foreach(var flower in flowerArea.Flowers){
+            if(nearestFlower == null && flower.HasNectar){
+                // No current nearest flower and this flower has nectar, so set to this flower
+                nearestFlower = flower;
+            } else if(flower.HasNectar){
+                // Calculate distance to this flower and distance to current nearest flower
+                float distanceToFlower = Vector3.Distance(flower.transform.position, beakTip.position);
+                float distanceToCurrentNearestFlower = Vector3.Distance(nearestFlower.transform.position, beakTip.position);
+
+                if(!nearestFlower.HasNectar || distanceToFlower < distanceToCurrentNearestFlower)
+                    nearestFlower = flower;
+            }
+        }
     }
+
+    #endregion
 
     #region Life Cycle
 
