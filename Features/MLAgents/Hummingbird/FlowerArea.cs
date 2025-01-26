@@ -19,7 +19,7 @@ public class FlowerArea : MonoBehaviour
     public List<Flower> Flowers {get; private set;} = new();
 
     /// <summary>Reset the flowers and flower plants</summary>
-    void ResetFlowers(){
+    public void ResetFlowers(){
         // Roatate each flower around the y axis and subtly around x and z
         foreach(var flowerPlant in flowerPlants){
             var xRotation = Random.Range(-5f, 5f);
