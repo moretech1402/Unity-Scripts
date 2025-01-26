@@ -59,9 +59,62 @@ public class HummingBirdAgent : Agent
     public float NectarObtained { get; private set; }
 
 
+    /// <summary>
+    /// Move the agent to a safe random position (i.e. does not collide with anything)
+    /// If in front of flower, also point the beak at the flower
+    /// </summary>
+    /// <param name="inFrontOfFlower">Whether to choose a spot in front of a flower</param>
     public void MoveToSafeRandomPosition(bool inFrontOfFlower)
     {
-        // ...
+        int maxAttempts = 100; // For preventing infinite loop
+        bool foundSafePositionWithinAttempts = false;
+        var potentialPosition = Vector3.zero;
+        var potentialRotation = new Quaternion();
+
+        // Loop until safe position is found or we run out of attempts
+        while(!foundSafePositionWithinAttempts && maxAttempts > 0){
+            maxAttempts--;
+            if(inFrontOfFlower){
+                // Pick a random flower
+                Flower randomFlower = flowerArea.Flowers[Random.Range(0, flowerArea.Flowers.Count)];
+
+                // Position 10 to 20 cm in front of the flower
+                float distanceToFlower = Random.Range(.1f, .2f);
+                potentialPosition = randomFlower.transform.position + randomFlower.FlowerVectorUp * distanceToFlower;
+
+                // Point beak to flower (bird's head is center of transform)
+                Vector3 toFlower = randomFlower.FlowerCenterPosition - potentialPosition;
+                potentialRotation = Quaternion.LookRotation(toFlower);
+            } else {
+                // Pick a random height from the ground
+                float height = Random.Range(1.2f, 2.5f);
+
+                // Pick a random radius from the center of area
+                float radius = Random.Range(2f, 7f);
+
+                // Pick a random direction rotated around y axis
+                var direction = Quaternion.Euler(0, Random.Range(-180f, 180f), 0);
+
+                // Combine height, radius and direction to pick a potential position
+                potentialPosition = flowerArea.transform.position + Vector3.up * height + direction * Vector3.forward * radius;
+
+                // Choose and set random starting pitch and yaw
+                var pitch = Random.Range(-60f, 60f);
+                var yaw = Random.Range(-180f, 180f);
+                potentialRotation = Quaternion.Euler(pitch, yaw, 0);
+            }
+
+            // Check to see if the agent collide with anything
+            bool hasCollisions = Physics.CheckSphere(potentialPosition, .05f);
+
+            // Safe position is found if no colliders are overlapped
+            foundSafePositionWithinAttempts = !hasCollisions;
+        }
+
+        Debug.Assert(foundSafePositionWithinAttempts, "Could not find a safe position to spawn");
+
+        // Set the position and rotation
+        transform.SetPositionAndRotation(potentialPosition, potentialRotation);
     }
 
     public void UpdateNearestFlower()
