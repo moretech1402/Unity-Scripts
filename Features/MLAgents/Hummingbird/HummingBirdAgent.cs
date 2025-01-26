@@ -321,6 +321,16 @@ public class HummingBirdAgent : Agent
         // 10 total observations
     }
 
+    /// <summary>
+    /// When Behavior Type is set to "Heuristic Only" on the agent's Behavior Parameters this function will be called.
+    /// Its return values will be fed into <see cref="OnActionReceived(ActionBuffers)"/> instead of using neural network.
+    /// </summary>
+    /// <param name="actionsOut">An output action buffer</param>
+    public override void Heuristic(in ActionBuffers actionsOut)
+    {
+        throw new NotImplementedException();
+    }
+
     #endregion
 
     #endregion
