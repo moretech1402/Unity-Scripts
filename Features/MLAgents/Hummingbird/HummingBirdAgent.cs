@@ -30,6 +30,9 @@ public class HummingBirdAgent : Agent
     [Tooltip("The agent's camera")]
     [SerializeField] Camera agentCamera;
 
+    [Tooltip("Name of nectar tag")]
+    [SerializeField] string nectarTag = "Nectar";
+
 
     [Header("ML")]
 
@@ -370,6 +373,36 @@ public class HummingBirdAgent : Agent
         continuousActionsOut[3] = pitch;
         continuousActionsOut[4] = yaw;
     }
+
+    #region Collisions
+
+    /// <summary>
+    /// Called when the agent's enters or stays a trigger collider
+    /// </summary>
+    /// <param name="other">The trigger's collider</param>
+    void TriggerEnterOrStay(Collider collider){
+        // Check if the agents is colliding with nectar
+        if(collider.CompareTag(nectarTag)){
+            Vector3 closestPointToBeakTip = collider.ClosestPoint(beakTip.position);
+
+            // Check if collider closest point is close to the beak tip
+            // Note: a collision with anything but the beak tip should not count
+        }
+    }
+
+    /// <summary>
+    /// Called when the agent's enters a trigger collider
+    /// </summary>
+    /// <param name="other">The trigger's collider</param>
+    private void OnTriggerEnter(Collider other) => TriggerEnterOrStay(other);
+
+    /// <summary>
+    /// Called when the agent's stays a trigger collider
+    /// </summary>
+    /// <param name="other">The trigger's collider</param>
+    private void OnTriggerStay(Collider other) => TriggerEnterOrStay(other);
+
+    #endregion
 
     #endregion
 
