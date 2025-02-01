@@ -331,11 +331,11 @@ public class HummingBirdAgent : Agent
 
         // Observe a dot product that indicates whether the beak tip is in front of the flower (1 observation)
         // (+1 means that the beak tip is directly in front of the flower, -1 means directly behaind)
-        Vector3.Dot(toFlower.normalized, -nearestFlower.FlowerVectorUp.normalized);
+        sensor.AddObservation(Vector3.Dot(toFlower.normalized, -nearestFlower.FlowerVectorUp.normalized));
 
         // Observe a dot product that indicates whether the beak tip is pointing toward the flower (1 observation)
         // (+1 means that the beak tip is pointing directly the flower, -1 means directly away)
-        Vector3.Dot(beakTip.forward.normalized, -nearestFlower.FlowerVectorUp.normalized);
+        sensor.AddObservation(Vector3.Dot(beakTip.forward.normalized, -nearestFlower.FlowerVectorUp.normalized));
 
         // Observe the relative distance from beak tip to the flower (1 observation)
         sensor.AddObservation(toFlower.magnitude / FlowerArea.AREA_DIAMETER);
@@ -453,6 +453,7 @@ public class HummingBirdAgent : Agent
     }
 
     private void FixedUpdate() {
+        // Avoids scenario where nearest flower nectar is stolen by opponent and not updated
         if(nearestFlower != null && !nearestFlower.HasNectar) UpdateNearestFlower();
     }
 
