@@ -30,8 +30,14 @@ public class HummingBirdAgent : Agent
     [Tooltip("The agent's camera")]
     [SerializeField] Camera agentCamera;
 
+
+    [Header("Tags")]
+
     [Tooltip("Name of nectar tag")]
     [SerializeField] string nectarTag = "Nectar";
+
+    [Tooltip("Name of boundary tag")]
+    [SerializeField] string boundaryTag = "Boundary";
 
 
     [Header("ML")]
@@ -421,6 +427,17 @@ public class HummingBirdAgent : Agent
     /// </summary>
     /// <param name="other">The trigger's collider</param>
     private void OnTriggerStay(Collider other) => TriggerEnterOrStay(other);
+
+    /// <summary>
+    /// Called when the agent collides with something solid
+    /// </summary>
+    /// <param name="other">The collision info</param> <summary>
+    private void OnCollisionEnter(Collision other) {
+        if(trainingMode && other.collider.CompareTag(boundaryTag)){
+            // Collided with the area boundary, rewarded with negative reward
+            AddReward(-.5f);
+        }
+    }
 
     #endregion
 
