@@ -225,6 +225,8 @@ public class HummingBirdAgent : Agent
 
     #region Life Cycle
 
+    #region Life Cycle/Agent
+
     public override void Initialize()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -380,7 +382,9 @@ public class HummingBirdAgent : Agent
         continuousActionsOut[4] = yaw;
     }
 
-    #region Collisions
+    #endregion
+
+    #region Life Cycle/Collisions
 
     /// <summary>
     /// Called when the agent's enters or stays a trigger collider
@@ -437,6 +441,19 @@ public class HummingBirdAgent : Agent
             // Collided with the area boundary, rewarded with negative reward
             AddReward(-.5f);
         }
+    }
+
+    #endregion
+
+    #region Life Cycle/Update
+
+    private void Update() {
+        if(nearestFlower != null)
+            Debug.DrawLine(beakTip.position, nearestFlower.FlowerCenterPosition, Color.green);
+    }
+
+    private void FixedUpdate() {
+        if(nearestFlower != null && !nearestFlower.HasNectar) UpdateNearestFlower();
     }
 
     #endregion
