@@ -29,17 +29,6 @@ namespace Core.Events
         public static void InputEscape() => OnInputEscape();
 
         #endregion
-
-        #region Move
-        public static event Action<int, bool> OnMove;
-        public static void Move(int goID, bool running) => OnMove?.Invoke(goID, running);
-
-        public static event Action<int> OnStopGO;
-        public static void StopGO(int goID) => OnStopGO?.Invoke(goID);
-
-        public static event Action<int, bool> OnIsGrounded;
-        public static void IsGrounded(int goID, bool isGrounded) => OnIsGrounded?.Invoke(goID, isGrounded);
-        #endregion
     }
 
 }

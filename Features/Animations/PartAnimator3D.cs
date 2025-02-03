@@ -1,28 +1,19 @@
 using System;
-using Core;
 using Core.Events;
-using UnityEngine;
 
 namespace Animation
 {
     public class PartAnimator3D : PartAnimator
     {
-        int speedHash, isRunningHash, isGroundedHash;
+        int speedHash, isGroundedHash;
+        int isRunningHash; // deprecated
 
-        void AnimateMove(int goID, bool isRunning)
+
+        void AnimateMove(int goID, MovementState movementState)
         {
             if (goID == gameObject.GetInstanceID())
-            {
-                animator.SetFloat(speedHash, 1);
-                animator.SetBool(isRunningHash, isRunning);
-            }
-        }
-
-        void AnimateStop(int goID)
-        {
-            if (goID == gameObject.GetInstanceID())
-                animator.SetFloat(speedHash, 0);
-        }
+                animator.SetFloat(speedHash, (float)movementState);
+        } 
 
         private void IsGrounded(int goID, bool isGrounded)
         {
@@ -32,23 +23,40 @@ namespace Animation
 
         private void Start()
         {
-            InitializeAnimator();
-
             speedHash = AnimatorManager.GetHash(AnimatorParameters3D.Speed);
-            isRunningHash = AnimatorManager.GetHash(AnimatorParameters3D.IsRunning);
+            isRunningHash = AnimatorManager.GetHash(AnimatorParameters3D.IsRunning); // deprecated
             isGroundedHash = AnimatorManager.GetHash(AnimatorParameters3D.IsGrounded);
 
-            EventManager.OnMove += AnimateMove;
-            EventManager.OnStopGO += AnimateStop;
-            EventManager.OnIsGrounded += IsGrounded;
+            MoveEventManager.OnComplexMove += AnimateMove;
+            MoveEventManager.OnIsGrounded += IsGrounded;
         }
 
         private void OnDestroy()
         {
-            EventManager.OnMove -= AnimateMove;
-            EventManager.OnStopGO -= AnimateStop;
-            EventManager.OnIsGrounded -= IsGrounded;
+            MoveEventManager.OnComplexMove -= AnimateMove;
+            MoveEventManager.OnIsGrounded -= IsGrounded;
         }
+
+        #region Legacy
+
+        [Obsolete ("Use Movement State")]
+        void AnimateMove(int goID, bool isRunning)
+        {
+            if (goID == gameObject.GetInstanceID())
+            {
+                animator.SetFloat(speedHash, 1);
+                animator.SetBool(isRunningHash, isRunning);
+            }
+        }
+
+        [Obsolete ("Use Animate Move with Movement State insteed")]
+        void AnimateStop(int goID)
+        {
+            if (goID == gameObject.GetInstanceID())
+                animator.SetFloat(speedHash, 0);
+        }
+
+        #endregion
     }
 
 }

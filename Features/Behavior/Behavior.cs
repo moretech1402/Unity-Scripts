@@ -29,9 +29,9 @@ public class Behavior : MonoBehaviour
         {
             // Generate a random position within a specific range
             randomPosition = new Vector3(
-                Random.Range(-10f, 10f), // X range (-10 to 10)
-                0,                       // Initial height (will be adjusted if on NavMesh)
-                Random.Range(-10f, 10f)  // Z range (-10 to 10)
+                Random.Range(-5f, 5f), // X
+                Random.Range(0, .5f),  // height (will be adjusted if on NavMesh)
+                Random.Range(-5f, 5f)  // Z
             );
 
             // Check if the position is near a passable area in the NavMesh
@@ -79,5 +79,7 @@ public class Behavior : MonoBehaviour
         // Move the character towards the current target
         if (targetPosition != Vector3.zero) // Ensure there is a valid target
             characterMove.MoveTo(targetPosition);
+        else
+            characterMove.StopMoving();
     }
 }

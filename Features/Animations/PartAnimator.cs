@@ -7,10 +7,7 @@ namespace Animation
     {
         protected Animator animator;
 
-        protected virtual void InitializeAnimator()
-        {
-            animator = GetComponent<Animator>();
-        }
+        private void Awake() => animator = GetComponent<Animator>();
     }
 
 }
