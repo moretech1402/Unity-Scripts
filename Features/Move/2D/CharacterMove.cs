@@ -29,10 +29,12 @@ namespace Move
 
             // Notify
             var id = gameObject.GetInstanceID();
-            if (movement.magnitude > 0)
-                EventManager.GOMoved(id, movement, finalSpeed);
-            else
-                EventManager.GOMoveStopped(id);
+
+            MovementState state;
+            if(isRunning) state = MovementState.Running;
+            else state = movement.magnitude > 0 ? MovementState.Walking : MovementState.Stopped;
+            
+            MoveEventManager.ComplexMove(id, state);
         }
 
         protected void Run(bool running) => isRunning = running;

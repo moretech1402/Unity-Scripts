@@ -89,8 +89,10 @@ namespace Move
             var finalMove = speed * runMult * normalizedMovement;
             velocity = new(finalMove.x, velocity.y, finalMove.z);
 
-            if (finalMove.magnitude <= 0) EventManager.StopGO(gameObject.GetInstanceID());
-            else EventManager.Move(gameObject.GetInstanceID(), isRunning);
+            MovementState state;
+            if (finalMove.magnitude <= 0) state = MovementState.Stopped;
+            else state = isRunning ? MovementState.Running : MovementState.Walking;
+            MoveEventManager.ComplexMove(gameObject.GetInstanceID(), state);
         }
 
         private void HandleGravity()
@@ -104,7 +106,7 @@ namespace Move
             if (oldIsGrounded != IsGrounded)
             {
                 oldIsGrounded = IsGrounded;
-                EventManager.IsGrounded(gameObject.GetInstanceID(), IsGrounded);
+                MoveEventManager.IsGrounded(gameObject.GetInstanceID(), IsGrounded);
             }
         }
 
