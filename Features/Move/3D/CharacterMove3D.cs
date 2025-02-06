@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Core.Contracts;
 using Core.Events;
 using UnityEngine;
 
@@ -11,9 +13,13 @@ namespace Move
 
     [RequireComponent(typeof(CharacterController))]
     public class CharacterMove3D : MonoBehaviour, ICharacterMove3D
-    {
+    {   
+        #region Variables
+
         [SerializeField] float defaultSpeed = 5, defaultRunMult = 2, defaultJumpForce = 5f, slideSpeed = 7, slideDownSpeed = 10;
-        [SerializeField] GameObject statsProvider;
+        [SerializeField] StatsProvider statsProvider;
+
+        Dictionary<MoveStatKeys, float> stats = new();
 
         float speed;
         bool isRunning, oldIsGrounded = true;
@@ -24,60 +30,24 @@ namespace Move
         CharacterController controller;
 
         bool IsGrounded => controller.isGrounded;
-        int StatsID => statsProvider.GetInstanceID();
 
-        float ValueOrDefault(float value, float defaultValue) => value >= 0 ? value : defaultValue;
+        #endregion
 
-        private void RequestStatValue(MoveStatKeys key, Action<float> valueReceivedCallback, float defaultValue)
-        {
-            if (statsProvider == null)
-            {
-                valueReceivedCallback(defaultValue);
-                return;
-            }
-
-            switch (key)
-            {
-                case MoveStatKeys.MovementSpeed:
-                    StatsEventManager.OnMovementSpeedReceived += valueReceivedCallback;
-                    StatsEventManager.RequestMovementSpeed(StatsID);
-                    return;
-                case MoveStatKeys.JumpForce:
-                    StatsEventManager.OnJumpForceReceived += valueReceivedCallback;
-                    StatsEventManager.RequestJumpForce(StatsID);
-                    return;
-                default:
-                    valueReceivedCallback(defaultValue);
-                    return;
-            }
-        }
-
-        private void JumpForceReceived(float value)
-        {
-            StatsEventManager.OnJumpForceReceived -= JumpForceReceived;
-            velocity.y = ValueOrDefault(value, defaultJumpForce);
-        }
+        #region Methods
 
         public void Jump()
         {
             if (controller.isGrounded)
-                RequestStatValue(MoveStatKeys.JumpForce, JumpForceReceived, defaultJumpForce);
+                velocity.y = stats[MoveStatKeys.JumpForce];
         }
 
         public void Run(bool running) => isRunning = running;
-
-        private void MovementSpeedReceived(float value)
-        {
-            StatsEventManager.OnMovementSpeedReceived -= MovementSpeedReceived;
-            speed = ValueOrDefault(value, defaultSpeed);
-        }
 
         public void Move(Vector3 movement)
         {
             if(!IsGrounded) return;
             // Calculate Speed
-            if (movement == Vector3.zero) speed = 0;
-            else RequestStatValue(MoveStatKeys.MovementSpeed, MovementSpeedReceived, defaultSpeed);
+            speed = movement == Vector3.zero ? 0 : stats[MoveStatKeys.MovementSpeed];
             var runMult = isRunning ? defaultRunMult : 1;
 
             // To Avoid speed increase when diagonal move
@@ -89,6 +59,7 @@ namespace Move
             var finalMove = speed * runMult * normalizedMovement;
             velocity = new(finalMove.x, velocity.y, finalMove.z);
 
+            // Notify movement
             MovementState state;
             if (finalMove.magnitude <= 0) state = MovementState.Stopped;
             else state = isRunning ? MovementState.Running : MovementState.Walking;
@@ -97,7 +68,6 @@ namespace Move
 
         private void HandleGravity()
         {
-            print($"{IsGrounded} {oldIsGrounded}");
             var yAceleration = GRAVITY_VALUE * Time.deltaTime;
             velocity.y += yAceleration;
             
@@ -120,6 +90,16 @@ namespace Move
             }
         }
 
+        void UpdateStats(){
+            bool hasProvider = statsProvider != null;
+            stats = new(){
+                { MoveStatKeys.MovementSpeed, hasProvider ? statsProvider.GetMovementSpeed() : defaultSpeed },
+                { MoveStatKeys.JumpForce, hasProvider ? statsProvider.GetJumpForce() : defaultJumpForce }
+            };
+        }
+
+        #endregion
+
         #region Life Cycle
 
         private void Update()
@@ -131,7 +111,10 @@ namespace Move
 
         private void OnControllerColliderHit(ControllerColliderHit hit) => hitNormal = hit.normal;
 
-        private void Awake() => controller = GetComponent<CharacterController>();
+        private void Awake() {
+            controller = GetComponent<CharacterController>();
+            UpdateStats();
+        }
 
         #endregion
     }
