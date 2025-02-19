@@ -1,15 +1,35 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-namespace Core.Utils
+namespace Core.Unity.Components
 {
     [Serializable]
-    public class SerializableDictionary<TKey, TValue>
+    public class SerializableDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>>
     {
         [SerializeField] private List<SerializableKeyValuePair<TKey, TValue>> pairs = new();
 
         private Dictionary<TKey, TValue> _dictionary;
+
+        public TKey[] Keys
+        {
+            get
+            {
+                ToDictionary();
+                return _dictionary.Keys.ToArray();
+            }
+        }
+
+        public TValue[] Values
+        {
+            get
+            {
+                ToDictionary();
+                return _dictionary.Values.ToArray();
+            }
+        }
 
         public Dictionary<TKey, TValue> ToDictionary()
         {
@@ -68,6 +88,18 @@ namespace Core.Utils
         {
             ToDictionary();
             return _dictionary.ContainsKey(key);
+        }
+
+        IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator()
+        {
+            ToDictionary();
+            return _dictionary.GetEnumerator();
+        }
+
+        /// <summary> Explicit implementation of the IENMERABLE INTERFACE (Non -generic) </summary>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable<KeyValuePair<TKey, TValue>>)this).GetEnumerator();
         }
     }
 
