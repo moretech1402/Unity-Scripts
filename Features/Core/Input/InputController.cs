@@ -31,12 +31,13 @@ namespace Core.Input
         {
             inputActions = new Dictionary<InputActions, InputHandlers>
             {
-                { InputActions.Action, new InputHandlers { OnPerformed = ctx => EventManager.InputAction() } },
-                { InputActions.Menu, new InputHandlers { OnPerformed = ctx => EventManager.InputMenu() } },
-                { InputActions.Escape, new InputHandlers { OnPerformed = ctx => EventManager.InputEscape() } },
+                { InputActions.Action, new InputHandlers { OnPerformed = ctx => InputEventManager.InputAction() } },
+                { InputActions.Jump, new InputHandlers { OnPerformed = ctx => InputEventManager.InputJump() } },
+                { InputActions.Menu, new InputHandlers { OnPerformed = ctx => InputEventManager.InputMenu() } },
+                { InputActions.Escape, new InputHandlers { OnPerformed = ctx => InputEventManager.InputEscape() } },
                 { InputActions.Run, new InputHandlers {
-                        OnPerformed = ctx => EventManager.InputRun(true),
-                        OnCanceled = ctx => EventManager.InputRun(false)
+                        OnPerformed = ctx => InputEventManager.InputRun(true),
+                        OnCanceled = ctx => InputEventManager.InputRun(false)
                     }
                 }
             };
@@ -71,7 +72,7 @@ namespace Core.Input
         private void Update()
         {
             var movement = playerInput.actions[actionsMap[InputActions.Move]].ReadValue<Vector2>();
-            EventManager.InputMove(movement);
+            InputEventManager.InputMove(movement);
         }
 
         private void OnEnable()

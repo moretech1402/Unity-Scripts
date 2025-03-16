@@ -5,13 +5,13 @@ namespace Core.Events
     /// <summary> Enumeration that represents the possible states of movement of a gameobject. </summary>
     public enum MovementState
     {
-        /// <summary>El GameObject está detenido.</summary>
+        /// <summary>The gameobject is stopped.</summary>
         Stopped = 0,
 
-        /// <summary>El GameObject está caminando.</summary>
+        /// <summary>The gameobject is walking.</summary>
         Walking = 1,
 
-        /// <summary>El GameObject está corriendo.</summary>
+        /// <summary>The gameobject is running.</summary>
         Running = 2
     }
 
@@ -29,15 +29,6 @@ namespace Core.Events
 
         public static event Action<int, bool> OnIsGrounded;
         public static void IsGrounded(int goID, bool isGrounded) => OnIsGrounded?.Invoke(goID, isGrounded);
-
-        #region Legacy
-        public static event Action<int, bool> OnMove;
-        public static void Move(int goID, bool running) => OnMove?.Invoke(goID, running);
-
-        public static event Action<int> OnStopGO;
-        public static void StopGO(int goID) => OnStopGO?.Invoke(goID);
-
-        #endregion
     }
 
 }

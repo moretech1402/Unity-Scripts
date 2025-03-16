@@ -3,10 +3,8 @@ using UnityEngine;
 
 namespace Core.Events
 {
-    public static class EventManager
+    public static class InputEventManager
     {
-        #region Input
-
         public static event Action<Vector2> OnInputMove;
         public static void InputMove(Vector2 move) => OnInputMove?.Invoke(move);
 
@@ -22,13 +20,11 @@ namespace Core.Events
         public static event Action OnInputJump = delegate { };
         public static void InputJump() => OnInputJump();
 
-        public static event Action OnInputMenu;
+        public static event Action OnInputMenu = delegate { };
         public static void InputMenu() => OnInputMenu();
 
         public static event Action OnInputEscape = delegate { };
         public static void InputEscape() => OnInputEscape();
-
-        #endregion
     }
 
 }
