@@ -1,23 +1,25 @@
 using UnityEngine;
 
 namespace Core {
-    public class Singleton<T> : MonoBehaviour where T : Component{
-        private static T _instance;
-        public static T Instance{
-            get{
-                if (_instance == null){
-                    _instance = FindObjectOfType<T>();
-                    if (_instance != null){
-                        GameObject newGO = new();
-                        _instance = newGO.AddComponent<T>();
-                    }
+    public class Singleton<T> : MonoBehaviour where T : Component {
+        public static T Instance { get; private set; }
+
+        protected virtual void Awake() {
+            if (Instance == null) {
+                Instance = FindObjectOfType<T>();
+                if (Instance == null) {
+                    CreateSingletonInstance();
                 }
-                return _instance;
+            } else if (Instance != this) {
+                Debug.LogError($"[Singleton] Multiple {typeof(T)} instances! Destroying.");
+                Destroy(gameObject);
             }
         }
 
-        protected virtual void Awake(){
-            _instance = this as T;
+        private void CreateSingletonInstance() {
+            GameObject singletonGO = new(typeof(T).Name + " Singleton");
+            Instance = singletonGO.AddComponent<T>();
+            Debug.LogWarning($"[Singleton] Instance of {typeof(T)} auto-created.");
         }
     }
 }
