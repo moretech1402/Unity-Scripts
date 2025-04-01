@@ -12,7 +12,7 @@ namespace Core.Events
         public static void InputMouse(Vector2 move) => OnInputMouse?.Invoke(move);
 
         public static event Action OnInputAction;
-        public static void InputAction() => OnInputAction();
+        public static void InputAction() => OnInputAction?.Invoke();
 
         public static event Action<bool> OnInputRun = delegate { };
         public static void InputRun(bool run) => OnInputRun?.Invoke(run);
