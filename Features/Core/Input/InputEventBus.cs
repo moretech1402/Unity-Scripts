@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-namespace Core.Events
+namespace Core.Input
 {
-    public static class InputEventManager
+    public static class InputEventBus
     {
         public static event Action<Vector2> OnInputMove;
         public static void InputMove(Vector2 move) => OnInputMove?.Invoke(move);

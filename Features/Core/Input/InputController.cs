@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Core.Events;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,15 +7,17 @@ namespace Core.Input
     [RequireComponent(typeof(PlayerInput))]
     public class InputController : Singleton<InputController>
     {
-        private PlayerInput playerInput;
-
         public enum InputActions
         {
             Action, Jump, Menu, Escape, Run, Move
         }
 
+        private PlayerInput playerInput;
+
         readonly Dictionary<InputActions, string> actionsMap = new(){
-            {InputActions.Action, "Action"}, {InputActions.Jump, "Jump"}, {InputActions.Menu, "Menu"}, {InputActions.Escape, "Escape"}, {InputActions.Run, "Run"}, {InputActions.Move, "Move"}
+            {InputActions.Action, "Action"}, {InputActions.Jump, "Jump"},
+            { InputActions.Menu, "Menu"}, {InputActions.Escape, "Escape"},
+            { InputActions.Run, "Run"}, {InputActions.Move, "Move"}
         };
 
         private struct InputHandlers
@@ -27,17 +28,42 @@ namespace Core.Input
 
         private Dictionary<InputActions, InputHandlers> inputActions;
 
+        #region Life Cycle
+
+        private void Update()
+        {
+            var movement = playerInput.actions[actionsMap[InputActions.Move]].ReadValue<Vector2>();
+            InputEventBus.InputMove(movement);
+        }
+
+        private void OnEnable()
+        {
+            playerInput = GetComponent<PlayerInput>();
+            InitializeInputActions();
+            RegisterEvents();
+        }
+
+        private void OnDisable() => RegisterEvents(false);
+
+        #endregion
+
+        #region Private Methods
+
         private void InitializeInputActions()
         {
             inputActions = new Dictionary<InputActions, InputHandlers>
             {
-                { InputActions.Action, new InputHandlers { OnPerformed = ctx => InputEventManager.InputAction() } },
-                { InputActions.Jump, new InputHandlers { OnPerformed = ctx => InputEventManager.InputJump() } },
-                { InputActions.Menu, new InputHandlers { OnPerformed = ctx => InputEventManager.InputMenu() } },
-                { InputActions.Escape, new InputHandlers { OnPerformed = ctx => InputEventManager.InputEscape() } },
+                { InputActions.Action, new InputHandlers {
+                    OnPerformed = ctx => InputEventBus.InputAction() } },
+                { InputActions.Jump, new InputHandlers {
+                    OnPerformed = ctx => InputEventBus.InputJump() } },
+                { InputActions.Menu, new InputHandlers {
+                    OnPerformed = ctx => InputEventBus.InputMenu() } },
+                { InputActions.Escape, new InputHandlers {
+                    OnPerformed = ctx => InputEventBus.InputEscape() } },
                 { InputActions.Run, new InputHandlers {
-                        OnPerformed = ctx => InputEventManager.InputRun(true),
-                        OnCanceled = ctx => InputEventManager.InputRun(false)
+                        OnPerformed = ctx => InputEventBus.InputRun(true),
+                        OnCanceled = ctx => InputEventBus.InputRun(false)
                     }
                 }
             };
@@ -67,23 +93,7 @@ namespace Core.Input
             }
         }
 
-        #region Life Cycle
-
-        private void Update()
-        {
-            var movement = playerInput.actions[actionsMap[InputActions.Move]].ReadValue<Vector2>();
-            InputEventManager.InputMove(movement);
-        }
-
-        private void OnEnable()
-        {
-            playerInput = GetComponent<PlayerInput>();
-            InitializeInputActions();
-            RegisterEvents();
-        }
-
-        private void OnDisable() => RegisterEvents(false);
-
         #endregion
+
     }
 }
