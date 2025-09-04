@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 
-namespace Core
+namespace MC.Core
 {
     public static class ServiceLocator
     {
-        static Dictionary<Type, object> _services = new();
+        static readonly Dictionary<Type, object> _services = new();
 
-        public static void Register<T>(T service)
+        public static void Register<T>(T service) where T : class
         {
             if (service == null) throw new ArgumentNullException(nameof(service));
             var type = typeof(T);
@@ -30,7 +30,7 @@ namespace Core
             }
             throw new KeyNotFoundException($"Service of type {type.Name} not registered.");
         }
-        
+
         public static void Unregister<T>()
         {
             var type = typeof(T);
@@ -43,5 +43,11 @@ namespace Core
                 throw new KeyNotFoundException($"Service of type {type.Name} not registered.");
             }
         }
+
+        /// <summary>
+        /// Clears all registered services from the locator.
+        /// Useful for unit testing to ensure isolation between tests.
+        /// </summary>
+        public static void Clear() => _services.Clear();
     }
 }
