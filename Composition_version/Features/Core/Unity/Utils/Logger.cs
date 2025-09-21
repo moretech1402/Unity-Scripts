@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Core.Unity.Utils
+namespace MC.Core.Unity.Utils
 {
     public class Logger : MonoBehaviour
     {

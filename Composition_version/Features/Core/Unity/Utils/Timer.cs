@@ -6,6 +6,10 @@ namespace MC.Core.Unity.Utils
     public class Timer : MonoBehaviour
     {
         [SerializeField] float _duration = 1f;
+        [SerializeField] bool _loop = false;
+        [SerializeField] bool _startOnAwake = true;
+
+        [Header("Events")]
         [SerializeField] UnityEvent<float, float> _onTimePassed;
         [SerializeField] UnityEvent _onTimerCompleted;
 
@@ -13,7 +17,7 @@ namespace MC.Core.Unity.Utils
 
         float _elapsedTime = 0f;
 
-        void Awake() => Reset();
+        void Awake() => RestartTimer(_startOnAwake);
 
         void Update()
         {
@@ -26,15 +30,16 @@ namespace MC.Core.Unity.Utils
                 _elapsedTime = _duration;
                 IsRunning = false;
                 _onTimerCompleted?.Invoke();
+                if (_loop) RestartTimer(true);
             }
 
             NotifyTimePassed();
         }
 
-        public void Reset()
+        public void RestartTimer(bool rerun = false)
         {
             _elapsedTime = 0f;
-            IsRunning = false;
+            IsRunning = rerun;
             NotifyTimePassed();
         }
 

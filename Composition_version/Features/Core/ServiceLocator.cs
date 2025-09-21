@@ -21,14 +21,24 @@ namespace MC.Core
             }
         }
 
-        public static T Get<T>()
+        public static bool TryGet<T>(out T service) where T : class
         {
-            var type = typeof(T);
-            if (_services.TryGetValue(type, out var service))
+            if (_services.TryGetValue(typeof(T), out var obj))
             {
-                return (T)service;
+                service = (T)obj;
+                return true;
             }
-            throw new KeyNotFoundException($"Service of type {type.Name} not registered.");
+
+            service = null;
+            return false;
+        }
+
+        public static T Get<T>() where T : class
+        {
+            if (TryGet<T>(out var service))
+                return service;
+
+            throw new KeyNotFoundException($"Service of type {typeof(T).Name} not registered.");
         }
 
         public static void Unregister<T>()
