@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace MC.Game{
 
+    [Obsolete("Use individual Initializers for each feature module")]
     public class ServiceInitializer : MonoBehaviour
     {
         [SerializeField] private ClassSO[] _initialClasses;
