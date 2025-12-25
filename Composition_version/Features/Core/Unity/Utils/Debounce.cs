@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace Core.Unity.Utils
+namespace MC.Core.Unity.Utils
 {
     public class Debounce
     {
