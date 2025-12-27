@@ -1,10 +1,11 @@
 using UnityEngine;
 
-namespace Core.Unity.Scenes
+namespace MC.Core.Unity.Scenes
 {
     public class SceneFlowController : MonoBehaviour
     {
-        public static void PushScene(SceneReferenceSO newScene) {
+        public static void PushScene(SceneReferenceSO newScene)
+        {
             if (ValidateScene(newScene))
                 SceneStacker.Instance.PushScene(newScene.Name);
         }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Core.Unity.Scenes
+namespace MC.Core.Unity.Scenes
 {
     public static class SceneVisibilityManager
     {

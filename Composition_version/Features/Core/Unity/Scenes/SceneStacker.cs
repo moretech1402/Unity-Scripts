@@ -2,11 +2,11 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
-using Core.Unity.Patterns;
 using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
+using MC.Core.Unity.Patterns;
 
-namespace Core.Unity.Scenes
+namespace MC.Core.Unity.Scenes
 {
     public class SceneStacker : Singleton<SceneStacker>
     {
