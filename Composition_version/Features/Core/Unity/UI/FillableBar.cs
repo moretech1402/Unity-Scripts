@@ -7,6 +7,8 @@ namespace MC.Core.Unity.UI
     {
         [SerializeField] Image _valueImage;
 
+        public float CurrentValue => _valueImage.fillAmount;
+
         void Awake()
         {
             if (_valueImage == null)
