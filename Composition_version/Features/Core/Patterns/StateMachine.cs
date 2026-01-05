@@ -1,32 +1,61 @@
-namespace Core.Patterns
+using System;
+
+namespace MC.Core.Patterns
 {
+    public interface ITransitionableState
+    {
+        public Action<IState> TransitionCallback { get; set; }
+    }
+
+    public interface ITickableState
+    {
+        void Tick();
+    }
+
+    public interface IExitState
+    {
+        void Exit();
+    }
+
     public interface IState
     {
         void Enter();
-        void Tick();
-        void Exit();
     }
 
     public class StateMachine
     {
         public IState CurrentState { get; private set; }
 
+        public Action<IState> OnStateChanged;
+
         public void Initialize(IState startingState)
         {
-            CurrentState = startingState;
-            CurrentState.Enter();
+            EnterState(startingState);
         }
 
         public void TransitionTo(IState nextState)
         {
-            CurrentState?.Exit();
-            CurrentState = nextState;
-            CurrentState.Enter();
+            if(CurrentState != null && CurrentState is IExitState exitState)
+                exitState?.Exit();
+
+            EnterState(nextState);
         }
 
         public void Update()
         {
-            CurrentState?.Tick();
+            if(CurrentState != null && CurrentState is ITickableState tickableState)
+                tickableState?.Tick();
+        }
+
+        private void EnterState(IState nextState)
+        {
+            CurrentState = nextState;
+            
+            if(nextState is ITransitionableState transitionable)
+                transitionable.TransitionCallback = TransitionTo;
+
+            CurrentState.Enter();
+            OnStateChanged?.Invoke(CurrentState);
         }
     }
 
