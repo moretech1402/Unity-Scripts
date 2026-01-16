@@ -1,0 +1,16 @@
+{
+    "name": "Core.Characters.Graph",
+    "rootNamespace": "",
+    "references": [
+        "GUID:f920cc6a2cdf16840b06459fedf51365"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
