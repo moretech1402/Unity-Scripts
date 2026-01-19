@@ -20,7 +20,10 @@ namespace MC.Core.Unity
         protected void Register<TService>(TService instance)
             where TService : class
         {
+#pragma warning disable IDE0001
+            // Explicit generic type is required to register the service by its contract (interface), not by implementation.
             ServiceLocator.Register<TService>(instance);
+#pragma warning restore IDE0001
         }
     }
 
