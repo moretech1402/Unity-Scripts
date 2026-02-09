@@ -1,4 +1,4 @@
-using MC.Core.Patterns;
+using MC.Core.Events;
 using MC.Core.Unity.Patterns;
 using UnityEngine;
 using UnityEngine.InputSystem;

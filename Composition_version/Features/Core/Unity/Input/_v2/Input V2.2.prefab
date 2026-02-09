@@ -1,0 +1,151 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3528237912331718654
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2578148275387167139, guid: e319b041ecadc8d489222cb56d115215, type: 3}
+      propertyPath: m_Name
+      value: Input V2.1 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829933626965018601, guid: e319b041ecadc8d489222cb56d115215, type: 3}
+      propertyPath: m_Actions
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: c5aafe0ea9e65414ca6208ae35d7428a, type: 3}
+    - target: {fileID: 5829933626965018601, guid: e319b041ecadc8d489222cb56d115215, type: 3}
+      propertyPath: m_DefaultActionMap
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829933626965018601, guid: e319b041ecadc8d489222cb56d115215, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829933626965018601, guid: e319b041ecadc8d489222cb56d115215, type: 3}
+      propertyPath: m_NotificationBehavior
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829933626965018601, guid: e319b041ecadc8d489222cb56d115215, type: 3}
+      propertyPath: m_ControlsChangedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7895185822349416042, guid: e319b041ecadc8d489222cb56d115215, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 38.9021
+      objectReference: {fileID: 0}
+    - target: {fileID: 7895185822349416042, guid: e319b041ecadc8d489222cb56d115215, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7895185822349416042, guid: e319b041ecadc8d489222cb56d115215, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 26.94534
+      objectReference: {fileID: 0}
+    - target: {fileID: 7895185822349416042, guid: e319b041ecadc8d489222cb56d115215, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7895185822349416042, guid: e319b041ecadc8d489222cb56d115215, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7895185822349416042, guid: e319b041ecadc8d489222cb56d115215, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7895185822349416042, guid: e319b041ecadc8d489222cb56d115215, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7895185822349416042, guid: e319b041ecadc8d489222cb56d115215, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7895185822349416042, guid: e319b041ecadc8d489222cb56d115215, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7895185822349416042, guid: e319b041ecadc8d489222cb56d115215, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3747509580836282871, guid: e319b041ecadc8d489222cb56d115215, type: 3}
+    - {fileID: 6794551331516049856, guid: e319b041ecadc8d489222cb56d115215, type: 3}
+    - {fileID: 7003202640181615482, guid: e319b041ecadc8d489222cb56d115215, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2578148275387167139, guid: e319b041ecadc8d489222cb56d115215, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7469827682617692352}
+    - targetCorrespondingSourceObject: {fileID: 2578148275387167139, guid: e319b041ecadc8d489222cb56d115215, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4478091030724316790}
+  m_SourcePrefab: {fileID: 100100000, guid: e319b041ecadc8d489222cb56d115215, type: 3}
+--- !u!1 &1383094928554720861 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2578148275387167139, guid: e319b041ecadc8d489222cb56d115215, type: 3}
+  m_PrefabInstance: {fileID: 3528237912331718654}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7469827682617692352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383094928554720861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4f083a6a63024a4c93520ccdcd0e1b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MC.Core.Unity.Input.InputAdapterGeneric
+  playerInput: {fileID: 6926188844652152855}
+  bindings:
+  - actionName: 
+    actionReference: {fileID: 0}
+    listenEvents:
+      started: 1
+      performed: 1
+      canceled: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4478091030724316790}
+          m_TargetAssemblyTypeName: MC.Core.Unity.Input.PlayerInputAdapter, Assembly-CSharp
+          m_MethodName: Move
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &4478091030724316790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383094928554720861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c39677ddf00143c4cb2c86d17f8a36aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MC.Core.Unity.Input.PlayerInputAdapter
+--- !u!114 &6926188844652152855 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5829933626965018601, guid: e319b041ecadc8d489222cb56d115215, type: 3}
+  m_PrefabInstance: {fileID: 3528237912331718654}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383094928554720861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
