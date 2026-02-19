@@ -27,6 +27,7 @@ namespace MC.Core.Unity
         }
     }
 
+    [DefaultExecutionOrder(-1000)]
     public class ServiceInitializerRunner : MonoBehaviour
     {
         [Tooltip("List of service initializers to run on Awake. Order matters.")]
